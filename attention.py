@@ -4,7 +4,11 @@ import numpy as np
 class ScaledDotProductAttention:
 
     def forward(self, Q, K, V):
-        # 1️⃣ Produto escalar entre Q e K^T
+        # 1️⃣ Produto escalar QK^T
         scores = np.matmul(Q, K.T)
 
-        return scores
+        # 2️⃣ Scaling factor
+        d_k = K.shape[-1]
+        scaled_scores = scores / np.sqrt(d_k)
+
+        return scaled_scores
